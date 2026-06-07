@@ -40,7 +40,7 @@ onMounted(() => {
 <template>
   <button
     @click="toggleTheme"
-    class="p-2 rounded-lg border border-border bg-card hover:bg-muted text-foreground transition-colors cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 flex items-center justify-center"
+    class="btn-tactile-muted p-2 inline-flex items-center justify-center cursor-pointer focus:outline-none focus:ring-2 focus:ring-primary"
     :title="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
     aria-label="Toggle theme"
   >

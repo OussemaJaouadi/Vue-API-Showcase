@@ -24,20 +24,44 @@ import Footer from './components/Footer.vue'
         </a>
 
         <!-- Header actions -->
-        <nav class="flex items-center gap-4">
+        <nav class="flex items-center gap-3 sm:gap-4">
+          <a
+            href="#architecture"
+            class="hidden md:inline-flex text-sm font-semibold text-muted-foreground hover:text-primary transition-colors"
+          >
+            Architecture
+          </a>
+          <a
+            href="#credibility"
+            class="hidden lg:inline-flex text-sm font-semibold text-muted-foreground hover:text-primary transition-colors"
+          >
+            Proof
+          </a>
+          <a
+            href="#features"
+            class="hidden lg:inline-flex text-sm font-semibold text-muted-foreground hover:text-primary transition-colors"
+          >
+            Features
+          </a>
+          <a
+            href="#screenshots"
+            class="hidden md:inline-flex text-sm font-semibold text-muted-foreground hover:text-primary transition-colors"
+          >
+            Screenshots
+          </a>
+          <a
+            href="#quick-start"
+            class="text-sm font-semibold text-muted-foreground hover:text-primary transition-colors"
+          >
+            Setup
+          </a>
           <a
             href="https://github.com/OussemaJaouadi/Vue-API"
             target="_blank"
             rel="noopener noreferrer"
-            class="hidden sm:inline-flex text-sm font-semibold hover:text-primary transition-colors"
+            class="hidden sm:inline-flex text-sm font-semibold text-muted-foreground hover:text-primary transition-colors"
           >
             GitHub
-          </a>
-          <a
-            href="#quick-start"
-            class="text-sm font-semibold hover:text-primary transition-colors"
-          >
-            Setup
           </a>
           
           <div class="h-4 w-px bg-border"></div>
