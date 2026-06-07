@@ -1,52 +1,48 @@
 <script setup lang="ts">
-import { PhGithubLogo, PhShieldStar, PhClock } from '@phosphor-icons/vue'
+import { PhClock, PhGithubLogo, PhShieldStar } from '@phosphor-icons/vue'
 </script>
 
 <template>
-  <footer class="py-12 border-t border-border bg-card text-muted-foreground text-xs md:text-sm">
-    <div class="container max-w-5xl px-4 mx-auto flex flex-col md:flex-row items-center justify-between gap-6">
-      <!-- Left side info -->
-      <div class="text-center md:text-left flex flex-col gap-1.5">
-        <div class="font-bold text-foreground font-heading">
+  <footer class="py-10 border-t border-border bg-card text-muted-foreground text-sm">
+    <div class="container max-w-6xl px-4 mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
+      <div>
+        <div class="font-heading font-bold text-foreground mb-1">
           Built with Go + Nuxt + SQLite
         </div>
         <div>
-          MIT License © 2026. Project by <span class="text-foreground font-semibold">Oussema Jaouadi</span>
+          MIT License · Project by <span class="text-foreground font-semibold">Oussema Jaouadi</span>
         </div>
       </div>
 
-      <!-- Right side links -->
-      <div class="flex items-center gap-4 flex-wrap justify-center font-semibold">
-        <a 
-          href="https://github.com/OussemaJaouadi/Vue-API" 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          class="flex items-center gap-1.5 text-muted-foreground hover:text-primary transition-colors cursor-pointer"
+      <nav class="flex items-center gap-2 flex-wrap font-bold">
+        <a
+          href="https://github.com/OussemaJaouadi/Vue-API"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-tactile-muted px-3 py-2 inline-flex items-center gap-2"
         >
-          <PhGithubLogo :size="16" />
+          <PhGithubLogo :size="16" weight="bold" />
           GitHub
         </a>
-        <span class="text-muted-foreground/30 select-none">·</span>
-        <a 
-          href="https://github.com/OussemaJaouadi/Vue-API/blob/main/SECURITY.md" 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          class="flex items-center gap-1.5 text-muted-foreground hover:text-primary transition-colors cursor-pointer"
+        <a
+          href="https://github.com/OussemaJaouadi/Vue-API/blob/main/SECURITY.md"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-tactile-muted px-3 py-2 inline-flex items-center gap-2"
         >
-          <PhShieldStar :size="16" />
+          <PhShieldStar :size="16" weight="bold" />
           Security
         </a>
-        <span class="text-muted-foreground/30 select-none">·</span>
-        <a 
-          href="https://github.com/OussemaJaouadi/Vue-API/blob/main/CHANGELOG.md" 
-          target="_blank" 
-          rel="noopener noreferrer" 
-          class="flex items-center gap-1.5 text-muted-foreground hover:text-primary transition-colors cursor-pointer"
+        <a
+          href="https://github.com/OussemaJaouadi/Vue-API/blob/main/CHANGELOG.md"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-tactile-muted px-3 py-2 inline-flex items-center gap-2"
         >
-          <PhClock :size="16" />
+          <PhClock :size="16" weight="bold" />
           Changelog
         </a>
-      </div>
+      </nav>
     </div>
   </footer>
 </template>
