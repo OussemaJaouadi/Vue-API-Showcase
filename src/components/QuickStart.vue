@@ -12,6 +12,19 @@ openssl rand -hex 32  # → PASSWORD_PEPPER
 task db:generate && task db:plan && task db:migrate
 task backend:dev & task frontend:dev`
 
+const commandLines = codeString.split('\n').map((line) => {
+  const commentIndex = line.indexOf('#')
+  const command = commentIndex >= 0 ? line.slice(0, commentIndex).trimEnd() : line
+  const comment = commentIndex >= 0 ? line.slice(commentIndex) : ''
+  const [binary = '', ...rest] = command.split(' ')
+
+  return {
+    binary,
+    rest: rest.join(' '),
+    comment
+  }
+})
+
 const isCopied = ref(false)
 
 const copyCode = async () => {
@@ -41,6 +54,17 @@ const copyCode = async () => {
             (becomes global manager), create a workspace, and start using
             the workbench.
           </p>
+          <div class="surface-flat p-3 mt-4">
+            <div class="text-xs font-black uppercase text-muted-foreground mb-1">Repository</div>
+            <a
+              href="https://github.com/OussemaJaouadi/Vue-API"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="font-mono text-sm font-bold text-primary hover:underline break-all"
+            >
+              github.com/OussemaJaouadi/Vue-API
+            </a>
+          </div>
         </div>
 
         <div class="surface-tactile overflow-hidden">
@@ -60,7 +84,11 @@ const copyCode = async () => {
             </button>
           </div>
 
-          <pre class="p-4 md:p-5 overflow-x-auto text-left font-mono text-xs md:text-sm leading-relaxed whitespace-pre text-foreground bg-card">{{ codeString }}</pre>
+          <pre class="p-4 md:p-5 overflow-x-auto text-left font-mono text-xs md:text-sm leading-relaxed whitespace-pre bg-card"><code><span
+            v-for="(line, index) in commandLines"
+            :key="`${line.binary}-${index}`"
+            class="block"
+          ><span class="text-primary font-bold">{{ line.binary }}</span><span v-if="line.rest" class="text-foreground"> {{ line.rest }}</span><span v-if="line.comment" class="text-muted-foreground">  {{ line.comment }}</span></span></code></pre>
         </div>
       </div>
     </div>

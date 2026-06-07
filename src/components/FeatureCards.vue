@@ -115,7 +115,7 @@ const groups: FeatureGroup[] = [
         <article
           v-for="group in groups"
           :key="group.title"
-          class="surface-tactile p-5 flex flex-col"
+          class="surface-tactile p-5 flex flex-col hover:-translate-y-1 hover:border-primary/40 group"
         >
           <div class="flex items-start gap-3 mb-5">
             <div class="p-2.5 border border-primary/25 bg-primary/5 text-primary">
@@ -131,7 +131,7 @@ const groups: FeatureGroup[] = [
             <div
               v-for="item in group.items"
               :key="item.title"
-              class="surface-flat p-3"
+              class="surface-flat p-3 transition-colors group-hover:border-primary/20"
             >
               <div class="flex items-center gap-2 mb-2">
                 <component :is="item.icon" :size="17" weight="bold" class="text-primary shrink-0" />

@@ -14,7 +14,7 @@ import Footer from './components/Footer.vue'
   <div class="min-h-screen bg-background text-foreground flex flex-col transition-colors duration-300">
     <!-- Navigation Header -->
     <header class="sticky top-0 z-50 bg-background/80 backdrop-blur-md border-b border-border transition-colors duration-300">
-      <div class="container max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
+      <div class="w-full px-4 sm:px-6 lg:px-8 h-16 flex items-center justify-between">
         <!-- Logo and brand name -->
         <a href="#" class="flex items-center gap-3 hover:opacity-90 transition-opacity">
           <img :src="logoMark" alt="Logo" class="w-8 h-8 object-contain" />
