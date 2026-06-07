@@ -3,8 +3,9 @@ import { PhArrowSquareOut, PhGithubLogo, PhShieldCheck } from '@phosphor-icons/v
 </script>
 
 <template>
-  <section class="relative border-b border-border bg-background dot-grid">
-    <div class="container max-w-6xl px-4 mx-auto py-12 md:py-16">
+  <section class="relative border-b border-border bg-background dot-grid overflow-hidden">
+    <div class="traffic-pattern"></div>
+    <div class="container max-w-6xl px-4 mx-auto py-12 md:py-16 relative z-10">
       <div class="grid lg:grid-cols-[0.82fr_1.18fr] gap-8 lg:gap-10 items-center">
         <div class="text-left">
           <div class="section-kicker mb-4">Self-hosted API workbench</div>

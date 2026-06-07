@@ -46,8 +46,9 @@ const proofPoints = [
 </script>
 
 <template>
-  <section id="architecture" class="py-12 md:py-16 border-b border-border bg-background">
-    <div class="container max-w-6xl px-4 mx-auto">
+  <section id="architecture" class="relative py-12 md:py-16 border-b border-border bg-background overflow-hidden">
+    <div class="traffic-pattern traffic-pattern-muted"></div>
+    <div class="container max-w-6xl px-4 mx-auto relative z-10">
       <div class="grid lg:grid-cols-[0.72fr_1.28fr] gap-8 lg:gap-10 items-start mb-10">
         <div>
           <div class="section-kicker mb-3">Architecture</div>
