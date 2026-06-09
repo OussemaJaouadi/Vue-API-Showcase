@@ -29,7 +29,7 @@ const techStack: TechItem[] = [
 </script>
 
 <template>
-  <section class="py-12 md:py-16 border-b border-border bg-muted">
+  <section class="py-12 md:py-16 border-b border-border bg-muted animate-section scroll-mt-24">
     <div class="container max-w-6xl px-4 mx-auto">
       <div class="grid lg:grid-cols-[0.65fr_1.35fr] gap-8 items-start">
         <div>

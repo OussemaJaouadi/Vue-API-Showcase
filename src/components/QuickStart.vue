@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue'
-import { PhCheck, PhCopy, PhTerminalWindow } from '@phosphor-icons/vue'
+import { PhCheck, PhCopy } from '@phosphor-icons/vue'
 
 const codeString = `git clone https://github.com/OussemaJaouadi/Vue-API && cd vue-api
 cp .env.example .env
@@ -16,11 +16,9 @@ const commandLines = codeString.split('\n').map((line) => {
   const commentIndex = line.indexOf('#')
   const command = commentIndex >= 0 ? line.slice(0, commentIndex).trimEnd() : line
   const comment = commentIndex >= 0 ? line.slice(commentIndex) : ''
-  const [binary = '', ...rest] = command.split(' ')
 
   return {
-    binary,
-    rest: rest.join(' '),
+    command,
     comment
   }
 })
@@ -41,7 +39,7 @@ const copyCode = async () => {
 </script>
 
 <template>
-  <section id="quick-start" class="py-12 md:py-16 border-b border-border bg-background">
+  <section id="quick-start" class="py-12 md:py-16 border-b border-border bg-background animate-section scroll-mt-24">
     <div class="container max-w-5xl px-4 mx-auto">
       <div class="grid lg:grid-cols-[0.72fr_1.28fr] gap-8 items-start">
         <div>
@@ -68,27 +66,32 @@ const copyCode = async () => {
         </div>
 
         <div class="surface-tactile overflow-hidden">
-          <div class="flex items-center justify-between gap-4 px-4 py-3 border-b border-border bg-muted/30">
-            <div class="flex items-center gap-2 text-sm font-heading font-bold text-foreground">
-              <PhTerminalWindow :size="18" weight="bold" class="text-primary" />
-              bash
+          <!-- Terminal header -->
+          <div class="flex items-center justify-between gap-4 px-4 py-2.5 border-b border-border bg-muted/40">
+            <div class="flex items-center gap-2.5 text-sm">
+              <span class="w-3 h-3 rounded-full bg-red-400/80"></span>
+              <span class="w-3 h-3 rounded-full bg-yellow-400/80"></span>
+              <span class="w-3 h-3 rounded-full bg-green-400/80"></span>
+              <span class="ml-2 text-xs font-bold text-muted-foreground font-heading">bash</span>
             </div>
             <button
               @click="copyCode"
-              class="btn-tactile-muted p-2 inline-flex items-center justify-center cursor-pointer"
-              title="Copy command to clipboard"
-              aria-label="Copy quick start commands"
+              class="btn-tactile-muted p-1.5 inline-flex items-center justify-center cursor-pointer"
+              title="Copy to clipboard"
+              aria-label="Copy commands"
             >
-              <PhCheck v-if="isCopied" :size="16" weight="bold" class="text-primary" />
-              <PhCopy v-else :size="16" weight="bold" />
+              <PhCheck v-if="isCopied" :size="14" weight="bold" class="text-primary" />
+              <PhCopy v-else :size="14" weight="bold" />
             </button>
           </div>
 
-          <pre class="p-4 md:p-5 overflow-x-auto text-left font-mono text-xs md:text-sm leading-relaxed whitespace-pre bg-card"><code><span
-            v-for="(line, index) in commandLines"
-            :key="`${line.binary}-${index}`"
-            class="block"
-          ><span class="text-primary font-bold">{{ line.binary }}</span><span v-if="line.rest" class="text-foreground"> {{ line.rest }}</span><span v-if="line.comment" class="text-muted-foreground">  {{ line.comment }}</span></span></code></pre>
+          <!-- Code block -->
+          <pre class="p-4 md:p-5 overflow-x-auto text-left font-mono text-sm leading-relaxed whitespace-pre bg-card/60"><code
+          ><span
+            v-for="(line, i) in commandLines"
+            :key="i"
+            class="block leading-6"
+          ><span class="text-primary/60 select-none">$ </span><span class="text-foreground">{{ line.command }}</span><span v-if="line.comment" class="text-muted-foreground/55 italic">  {{ line.comment }}</span></span></code></pre>
         </div>
       </div>
     </div>

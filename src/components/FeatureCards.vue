@@ -29,7 +29,7 @@ interface FeatureGroup {
 const groups: FeatureGroup[] = [
   {
     title: 'Build requests',
-    summary: 'Compose requests with editor, auth, and environment context before they hit the backend boundary.',
+    summary: 'Stop switching between editors, auth configs, and environment files. Compose everything in one surface before the request crosses the network boundary.',
     icon: PhPuzzlePiece,
     items: [
       {
@@ -51,7 +51,7 @@ const groups: FeatureGroup[] = [
   },
   {
     title: 'Execute safely',
-    summary: 'Route HTTP and WebSocket traffic through the Go backend while preserving timing and response evidence.',
+    summary: 'Direct browser-to-API calls leak credentials and bypass audit. Route every request through the Go proxy so execution is recorded, timed, and controlled.',
     icon: PhShieldCheck,
     items: [
       {
@@ -73,7 +73,7 @@ const groups: FeatureGroup[] = [
   },
   {
     title: 'Organize teams',
-    summary: 'Keep collections, access rules, imports, and authentication inside a workspace-aware operating model.',
+    summary: 'Without workspace boundaries, shared API collections become credential spreadsheets. Isolate teams, imports, and auth into scoped workspaces.',
     icon: PhUsersFour,
     items: [
       {
@@ -97,7 +97,7 @@ const groups: FeatureGroup[] = [
 </script>
 
 <template>
-  <section id="features" class="py-12 md:py-16 border-b border-border bg-muted">
+  <section id="features" class="py-12 md:py-16 border-b border-border bg-muted animate-section scroll-mt-24">
     <div class="container max-w-6xl px-4 mx-auto">
       <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
         <div>

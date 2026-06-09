@@ -27,13 +27,13 @@ const screenshots = [
 </script>
 
 <template>
-  <section id="screenshots" class="py-12 md:py-16 border-b border-border bg-background">
+  <section id="screenshots" class="py-12 md:py-16 border-b border-border bg-background animate-section scroll-mt-24">
     <div class="container max-w-6xl px-4 mx-auto">
       <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
         <div>
-          <div class="section-kicker mb-3">Screenshots</div>
+          <div class="section-kicker mb-3">Product Preview</div>
           <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-foreground">
-            Product evidence slots.
+            See the workbench in action.
           </h2>
         </div>
         <p class="text-sm text-muted-foreground max-w-xl leading-relaxed">

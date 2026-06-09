@@ -332,3 +332,19 @@ html.reduce-motion * {
 .animate-float-slower {
   animation: float 18s ease-in-out infinite;
 }
+
+/* Section entrance animations */
+@keyframes section-in {
+  0% {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-section {
+  animation: section-in 640ms cubic-bezier(0.2, 0.8, 0.2, 1) both;
+}
