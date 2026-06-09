@@ -227,13 +227,13 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Subtle falling traffic texture inspired by backend request flow. */
 .traffic-pattern {
-  --traffic-color: oklch(0.508 0.118 165.612 / 0.16);
-  --traffic-veil: oklch(1 0 0 / 0.58);
+  --traffic-color: oklch(0.508 0.118 165.612 / 0.055);
+  --traffic-veil: oklch(1 0 0 / 0.82);
   position: absolute;
   inset: 0;
   pointer-events: none;
   overflow: hidden;
-  opacity: 0.9;
+  opacity: 0.5;
   background-image:
     radial-gradient(3px 78px at 0 42px, var(--traffic-color), transparent),
     radial-gradient(3px 78px at 240px 118px, var(--traffic-color), transparent),
@@ -265,14 +265,14 @@ h1, h2, h3, h4, h5, h6 {
     100px 0,
     300px 160px;
   animation: traffic-fall 90s linear infinite;
-  mask-image: radial-gradient(ellipse at 55% 35%, black 0%, transparent 72%);
+  mask-image: radial-gradient(ellipse at 58% 34%, black 0%, transparent 64%);
 }
 
 .traffic-pattern::after {
   content: "";
   position: absolute;
   inset: 0;
-  backdrop-filter: blur(0.35rem);
+  backdrop-filter: blur(0.55rem);
   background:
     radial-gradient(ellipse at 55% 35%, transparent 0%, transparent 34%, var(--traffic-veil) 76%),
     linear-gradient(to bottom, var(--traffic-veil), transparent 24%, transparent 68%, var(--traffic-veil));
@@ -285,7 +285,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .traffic-pattern-muted {
-  opacity: 0.55;
+  opacity: 0.28;
   mask-image: linear-gradient(to bottom, transparent 0%, black 18%, black 78%, transparent 100%);
 }
 
