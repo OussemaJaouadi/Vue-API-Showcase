@@ -11,7 +11,6 @@ import {
 } from '@phosphor-icons/vue'
 import SectionHeader from './SectionHeader.vue'
 import SectionShell from './SectionShell.vue'
-import FallingPattern from './ui/FallingPattern.vue'
 
 interface TechItem {
   layer: string
@@ -33,23 +32,11 @@ const techStack: TechItem[] = [
 </script>
 
 <template>
-  <SectionShell tone="muted">
-      <template #background>
-        <FallingPattern
-          class="falling-pattern-section"
-          color="oklch(0.508 0.118 165.612 / 0.08)"
-          background-color="transparent"
-          :duration="210"
-          blur-intensity="0"
-          :density="1.9"
-          :opacity="0.14"
-        />
-      </template>
+  <SectionShell id="tech-stack" tone="muted" rain="faint">
       <div class="grid lg:grid-cols-[0.65fr_1.35fr] gap-8 items-start">
         <SectionHeader
-          kicker="Stack Map"
-          title="Clear layers, fewer surprises."
-          body="The project keeps the frontend, backend, persistence, auth, and realtime layers explicit."
+          kicker="Stack"
+          title="Built with"
           mode="stack"
         />
 

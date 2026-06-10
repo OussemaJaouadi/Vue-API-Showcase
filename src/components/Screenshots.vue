@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import { computed, onBeforeUnmount, ref, watch } from 'vue'
-import { PhBracketsCurly, PhEye, PhMoon, PhTreeStructure, PhWrench, PhX } from '@phosphor-icons/vue'
+import { PhBracketsCurly, PhEye, PhLockKey, PhPaintBrush, PhSliders, PhTreeStructure, PhUsersFour, PhWrench, PhX } from '@phosphor-icons/vue'
 import SectionHeader from './SectionHeader.vue'
 import SectionShell from './SectionShell.vue'
-import FallingPattern from './ui/FallingPattern.vue'
 import accessPolicyImage from '../assets/screenshots/access-policy.png'
 import collectionsBrowserImage from '../assets/screenshots/collections-browser.png'
 import environmentDrawerImage from '../assets/screenshots/environment-drawer.png'
@@ -15,7 +14,7 @@ import workbenchEditorImage from '../assets/screenshots/workbench-editor.png'
 const screenshots = [
   {
     title: 'Workbench Editor',
-    caption: 'Workbench Editor — build and execute requests with live response inspection.',
+    caption: 'Build and execute requests with live response inspection.',
     icon: PhWrench,
     primary: true,
     accent: 'oklch(0.508 0.118 165.612)',
@@ -23,43 +22,43 @@ const screenshots = [
   },
   {
     title: 'Collections Browser',
-    caption: 'Collections Browser — organize collections, requests, policy constraints, and execution safety.',
+    caption: 'Organize collections, requests, policy constraints, and execution safety.',
     icon: PhTreeStructure,
     accent: 'oklch(0.55 0.16 250)',
     image: collectionsBrowserImage
   },
   {
     title: 'Environment Drawer',
-    caption: 'Environment Drawer — create scoped variables with visibility tiers and inherited defaults.',
+    caption: 'Scoped variables with visibility tiers and inherited defaults.',
     icon: PhBracketsCurly,
     accent: 'oklch(0.58 0.16 305)',
     image: environmentDrawerImage
   },
   {
     title: 'Access Policy',
-    caption: 'Access Policy — inspect grants, denied resources, and execution gaps per workspace member.',
-    icon: PhMoon,
+    caption: 'Grants, denied resources, and execution gaps per member.',
+    icon: PhLockKey,
     accent: 'oklch(0.62 0.15 55)',
     image: accessPolicyImage
   },
   {
     title: 'Workspace Control',
-    caption: 'Workspace Control — rename, inspect access, and manage destructive workspace actions.',
-    icon: PhTreeStructure,
+    caption: 'Rename, inspect access, and manage destructive actions.',
+    icon: PhUsersFour,
     accent: 'oklch(0.56 0.16 25)',
     image: workspaceManagementImage
   },
   {
     title: 'Settings Layout',
-    caption: 'Settings Layout — tune theme, response placement, sidebar width, and editor sizing.',
-    icon: PhMoon,
+    caption: 'Response placement, sidebar width, and editor sizing.',
+    icon: PhSliders,
     accent: 'oklch(0.5 0.13 185)',
     image: settingsLayoutImage
   },
   {
     title: 'Settings Appearance',
-    caption: 'Settings Appearance — switch themes and local workbench layout preferences.',
-    icon: PhMoon,
+    caption: 'Theme and local layout preferences.',
+    icon: PhPaintBrush,
     accent: 'oklch(0.58 0.12 120)',
     image: settingsAppearanceImage
   }
@@ -101,22 +100,10 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <SectionShell id="screenshots">
-    <template #background>
-      <FallingPattern
-        class="falling-pattern-section"
-        color="oklch(0.508 0.118 165.612 / 0.1)"
-        background-color="transparent"
-        :duration="190"
-        blur-intensity="0"
-        :density="1.7"
-        :opacity="0.18"
-      />
-    </template>
+  <SectionShell id="screenshots" tone="background" rain="low">
     <SectionHeader
-      kicker="Product Preview"
-      title="See the workbench in action."
-      body="Actual screens from the workbench: request execution, collections, scoped environments, access policy, and local layout controls."
+      kicker="Preview"
+      title="See it in action."
     />
 
       <div class="grid gap-5">

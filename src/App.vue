@@ -12,6 +12,7 @@ import Footer from './components/Footer.vue'
 const navLinks = [
   { label: 'Architecture', href: '#architecture' },
   { label: 'Features', href: '#features' },
+  { label: 'Preview', href: '#screenshots' },
   { label: 'Setup', href: '#quick-start' }
 ]
 </script>

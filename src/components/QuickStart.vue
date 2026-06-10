@@ -3,7 +3,6 @@ import { ref } from 'vue'
 import { PhCheck, PhCopy } from '@phosphor-icons/vue'
 import SectionHeader from './SectionHeader.vue'
 import SectionShell from './SectionShell.vue'
-import FallingPattern from './ui/FallingPattern.vue'
 
 const codeString = `git clone https://github.com/OussemaJaouadi/Vue-API && cd vue-api
 cp .env.example .env
@@ -75,18 +74,7 @@ const copyCode = async () => {
 </script>
 
 <template>
-  <SectionShell id="quick-start" max-width="5xl">
-      <template #background>
-        <FallingPattern
-          class="falling-pattern-section"
-          color="oklch(0.508 0.118 165.612 / 0.07)"
-          background-color="transparent"
-          :duration="230"
-          blur-intensity="0"
-          :density="2"
-          :opacity="0.12"
-        />
-      </template>
+  <SectionShell id="quick-start" max-width="5xl" tone="background" rain="faint">
       <div class="grid lg:grid-cols-[0.72fr_1.28fr] gap-8 items-start">
         <div>
           <SectionHeader
@@ -95,21 +83,8 @@ const copyCode = async () => {
             mode="stack"
           />
           <p class="text-sm text-muted-foreground leading-relaxed -mt-4">
-            Open <a href="http://localhost:3000" target="_blank" rel="noopener noreferrer" class="text-primary font-bold hover:underline">http://localhost:3000</a> — register the first account
-            (becomes global manager), create a workspace, and start using
-            the workbench.
+            One local command path for cloning, secrets, migrations, and the two dev servers.
           </p>
-          <div class="surface-flat p-3 mt-4">
-            <div class="text-xs font-black uppercase text-muted-foreground mb-1">Repository</div>
-            <a
-              href="https://github.com/OussemaJaouadi/Vue-API"
-              target="_blank"
-              rel="noopener noreferrer"
-              class="font-mono text-sm font-bold text-primary hover:underline break-all"
-            >
-              github.com/OussemaJaouadi/Vue-API
-            </a>
-          </div>
         </div>
 
         <div class="surface-tactile overflow-hidden">

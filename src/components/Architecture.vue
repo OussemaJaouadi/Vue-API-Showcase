@@ -3,53 +3,14 @@ import {
   PhBroadcast,
   PhDatabase,
   PhGlobe,
-  PhLockKey,
   PhShieldCheck,
-  PhSwap,
   PhTerminalWindow,
-  PhUsersFour,
   PhWebhooksLogo
 } from '@phosphor-icons/vue'
 import FallingPattern from './ui/FallingPattern.vue'
+import { getSectionRain } from '../lib/sectionRain'
 
-const proofPoints = [
-  {
-    title: 'JWT + HttpOnly refresh',
-    description: 'Access and refresh tokens with separate secrets and browser-safe refresh cookies.',
-    icon: PhLockKey,
-    accent: 'oklch(0.56 0.16 25)'
-  },
-  {
-    title: 'Argon2id invalidation',
-    description: 'Password hashing, pepper support, and token version invalidation for forced logout.',
-    icon: PhShieldCheck,
-    accent: 'oklch(0.508 0.118 165.612)'
-  },
-  {
-    title: 'Workspace grants',
-    description: 'Membership roles and per-resource grants for team-scoped access control.',
-    icon: PhUsersFour,
-    accent: 'oklch(0.58 0.16 305)'
-  },
-  {
-    title: 'Import/export formats',
-    description: 'Workbench JSON, OpenAPI 3.x, Swagger 2.x, and Postman v2.1 support.',
-    icon: PhSwap,
-    accent: 'oklch(0.55 0.16 250)'
-  },
-  {
-    title: 'Persisted history',
-    description: 'Full request and response snapshots with method, URL, status, and timing.',
-    icon: PhDatabase,
-    accent: 'oklch(0.62 0.15 55)'
-  },
-  {
-    title: 'SSE + WebSocket relay',
-    description: 'Single-use SSE tickets and backend-mediated bidirectional WebSocket traffic.',
-    icon: PhBroadcast,
-    accent: 'oklch(0.5 0.13 185)'
-  }
-]
+const rain = getSectionRain('high')
 
 const flowNodes = [
   {
@@ -99,27 +60,25 @@ const downstreamNodes = [
 </script>
 
 <template>
-  <section id="architecture" class="relative py-12 md:py-16 border-b border-border bg-background overflow-hidden animate-section scroll-mt-24">
+  <section id="architecture" class="section-shell-continuity relative py-12 md:py-16 border-b border-border bg-background overflow-hidden animate-section scroll-mt-24" style="--section-fade-color: var(--background)">
     <FallingPattern
-      class="falling-pattern-section"
-      color="oklch(0.508 0.118 165.612 / 0.2)"
+      :class="rain.className"
+      :color="rain.color"
       background-color="transparent"
-      :duration="150"
-      blur-intensity="0"
-      :density="1.35"
-      :opacity="0.45"
+      :duration="rain.duration"
+      :blur-intensity="rain.blurIntensity"
+      :density="rain.density"
+      :opacity="rain.opacity"
     />
     <div class="container max-w-6xl px-4 mx-auto relative z-10">
-      <div class="grid lg:grid-cols-[0.72fr_1.28fr] gap-8 lg:gap-10 items-start mb-14">
+      <div class="grid lg:grid-cols-[0.72fr_1.28fr] gap-8 lg:gap-10 items-start">
         <div>
           <div class="section-kicker mb-3">Architecture</div>
           <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-foreground mb-4">
             The browser never connects directly to target APIs.
           </h2>
           <p class="text-muted-foreground text-base md:text-lg leading-relaxed">
-            All request execution and WebSocket traffic flows through a Go backend proxy,
-            isolating the network boundary. An SSE broker with single-use
-            tickets delivers real-time events to the frontend.
+            All traffic flows through a Go backend proxy. An SSE broker with single-use tickets pushes realtime events to the frontend.
           </p>
         </div>
 
@@ -188,46 +147,6 @@ const downstreamNodes = [
                   <div class="font-heading font-bold text-sm text-foreground">{{ node.title }}</div>
                 </div>
                 <p class="text-[11px] leading-relaxed text-muted-foreground">{{ node.detail }}</p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <div id="credibility" class="pt-3">
-        <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-5">
-          <div>
-            <div class="section-kicker mb-3">Engineering proof</div>
-            <h3 class="text-2xl md:text-3xl font-bold tracking-tight text-foreground">
-              Built like an internal tool you can operate.
-            </h3>
-          </div>
-          <p class="text-sm text-muted-foreground max-w-xl leading-relaxed">
-            Compact proof points from the auth, team, import/export, history, and realtime layers.
-          </p>
-        </div>
-
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          <div
-            v-for="point in proofPoints"
-            :key="point.title"
-            class="card-workbench p-4 hover:border-primary/50 transition-all group"
-            :style="{ boxShadow: `4px 4px 0 0 color-mix(in oklch, ${point.accent} 14%, transparent)` }"
-          >
-            <div class="flex items-start gap-3">
-              <div
-                class="shrink-0 w-9 h-9 border inline-flex items-center justify-center transition-colors"
-                :style="{
-                  color: point.accent,
-                  borderColor: `color-mix(in oklch, ${point.accent} 28%, transparent)`,
-                  backgroundColor: `color-mix(in oklch, ${point.accent} 7%, transparent)`
-                }"
-              >
-                <component :is="point.icon" :size="18" weight="bold" />
-              </div>
-              <div>
-                <h4 class="font-heading font-bold text-sm text-foreground mb-1">{{ point.title }}</h4>
-                <p class="text-xs text-muted-foreground leading-relaxed">{{ point.description }}</p>
               </div>
             </div>
           </div>

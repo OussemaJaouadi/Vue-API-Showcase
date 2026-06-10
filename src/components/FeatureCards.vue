@@ -14,7 +14,6 @@ import {
 } from '@phosphor-icons/vue'
 import SectionHeader from './SectionHeader.vue'
 import SectionShell from './SectionShell.vue'
-import FallingPattern from './ui/FallingPattern.vue'
 
 interface FeatureItem {
   title: string
@@ -104,22 +103,10 @@ const groups: FeatureGroup[] = [
 </script>
 
 <template>
-  <SectionShell id="features" tone="muted">
-    <template #background>
-      <FallingPattern
-        class="falling-pattern-section"
-        color="oklch(0.508 0.118 165.612 / 0.14)"
-        background-color="transparent"
-        :duration="170"
-        blur-intensity="0"
-        :density="1.55"
-        :opacity="0.28"
-      />
-    </template>
+  <SectionShell id="features" tone="muted" rain="medium">
     <SectionHeader
       kicker="Features"
       title="Three workflows, one backend boundary."
-      body="The feature set reads better as how the workbench is used: build requests, execute them safely, and organize the team context around them."
     />
 
       <div class="grid lg:grid-cols-3 gap-5">

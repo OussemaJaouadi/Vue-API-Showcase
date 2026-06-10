@@ -1,6 +1,7 @@
 <script setup lang="ts">
-import { PhArrowSquareOut, PhGithubLogo, PhShieldCheck } from '@phosphor-icons/vue'
+import { PhArrowDown, PhGithubLogo } from '@phosphor-icons/vue'
 import FallingPattern from './ui/FallingPattern.vue'
+
 </script>
 
 <template>
@@ -16,19 +17,16 @@ import FallingPattern from './ui/FallingPattern.vue'
     />
     <div class="container max-w-5xl px-4 mx-auto py-20 md:py-28 relative z-10">
       <div class="text-center max-w-3xl mx-auto">
-        <div class="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.12em] text-primary mb-6 border border-primary/20 bg-primary/5 px-3 py-1.5">
-          <PhShieldCheck :size="14" weight="bold" />
-          Self-hosted API workbench
-        </div>
-
         <h1 class="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-foreground mb-6 leading-[1.08]">
           Vue API <span class="text-primary">Workbench</span>
         </h1>
 
-        <p class="text-lg sm:text-xl text-muted-foreground leading-relaxed mb-8 max-w-2xl mx-auto">
-          Self-hosted API workbench built with Nuxt 4 and Go.
-          Manage workspaces, collections, environments, and execute
-          proxied HTTP and WebSocket requests from a browser UI.
+        <p class="text-lg sm:text-xl text-muted-foreground leading-relaxed mb-6 max-w-2xl mx-auto">
+          Manage workspaces, collections, environments, and execute proxied HTTP and WebSocket requests from a browser UI.
+        </p>
+
+        <p class="text-xs font-bold text-muted-foreground mb-8 tracking-wide">
+          Go · Nuxt 4 · Bun · SQLite · MIT
         </p>
 
         <div class="flex flex-col sm:flex-row gap-3 justify-center">
@@ -46,10 +44,9 @@ import FallingPattern from './ui/FallingPattern.vue'
             class="btn-tactile-muted px-6 py-3.5 text-sm font-bold inline-flex items-center justify-center gap-2.5"
           >
             Explore Features
-            <PhArrowSquareOut :size="18" weight="bold" />
+            <PhArrowDown :size="18" weight="bold" />
           </a>
         </div>
-
       </div>
     </div>
   </section>
