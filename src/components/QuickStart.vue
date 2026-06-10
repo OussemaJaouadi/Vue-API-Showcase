@@ -1,6 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { PhCheck, PhCopy } from '@phosphor-icons/vue'
+import SectionHeader from './SectionHeader.vue'
+import SectionShell from './SectionShell.vue'
+import FallingPattern from './ui/FallingPattern.vue'
 
 const codeString = `git clone https://github.com/OussemaJaouadi/Vue-API && cd vue-api
 cp .env.example .env
@@ -12,13 +15,46 @@ openssl rand -hex 32  # → PASSWORD_PEPPER
 task db:generate && task db:plan && task db:migrate
 task backend:dev & task frontend:dev`
 
+type BashTokenKind = 'command' | 'operator' | 'option' | 'path' | 'url' | 'target' | 'number' | 'text' | 'space'
+
+const commandNames = new Set(['git', 'cd', 'cp', 'openssl', 'task'])
+const tokenClasses: Record<BashTokenKind, string> = {
+  command: 'text-[oklch(0.55_0.16_250)] dark:text-[oklch(0.76_0.12_250)] font-bold',
+  operator: 'text-[oklch(0.62_0.15_55)] dark:text-[oklch(0.82_0.13_65)] font-semibold',
+  option: 'text-[oklch(0.58_0.16_305)] dark:text-[oklch(0.78_0.12_305)]',
+  path: 'text-[oklch(0.5_0.12_185)] dark:text-[oklch(0.76_0.11_185)]',
+  url: 'text-[oklch(0.5_0.15_225)] dark:text-[oklch(0.76_0.12_225)] underline decoration-current/25 underline-offset-2',
+  target: 'text-[oklch(0.56_0.16_25)] dark:text-[oklch(0.78_0.12_25)]',
+  number: 'text-[oklch(0.55_0.12_150)] dark:text-[oklch(0.75_0.1_150)]',
+  text: 'text-foreground',
+  space: ''
+}
+
 const commandLines = codeString.split('\n').map((line) => {
   const commentIndex = line.indexOf('#')
   const command = commentIndex >= 0 ? line.slice(0, commentIndex).trimEnd() : line
   const comment = commentIndex >= 0 ? line.slice(commentIndex) : ''
 
+  const tokens = command.split(/(\s+|&&|&)/).filter(Boolean).map((token) => {
+    let kind: BashTokenKind = 'text'
+
+    if (/^\s+$/.test(token)) kind = 'space'
+    else if (token === '&&' || token === '&') kind = 'operator'
+    else if (commandNames.has(token)) kind = 'command'
+    else if (token.startsWith('-')) kind = 'option'
+    else if (/^\d+$/.test(token)) kind = 'number'
+    else if (token.startsWith('http')) kind = 'url'
+    else if (token.includes(':')) kind = 'target'
+    else if (token.includes('/') || token.startsWith('.')) kind = 'path'
+
+    return {
+      text: token,
+      kind
+    }
+  })
+
   return {
-    command,
+    tokens,
     comment
   }
 })
@@ -39,15 +75,26 @@ const copyCode = async () => {
 </script>
 
 <template>
-  <section id="quick-start" class="py-12 md:py-16 border-b border-border bg-background animate-section scroll-mt-24">
-    <div class="container max-w-5xl px-4 mx-auto">
+  <SectionShell id="quick-start" max-width="5xl">
+      <template #background>
+        <FallingPattern
+          class="falling-pattern-section"
+          color="oklch(0.508 0.118 165.612 / 0.07)"
+          background-color="transparent"
+          :duration="230"
+          blur-intensity="0"
+          :density="2"
+          :opacity="0.12"
+        />
+      </template>
       <div class="grid lg:grid-cols-[0.72fr_1.28fr] gap-8 items-start">
         <div>
-          <div class="section-kicker mb-3">Get Started</div>
-          <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-foreground mb-4">
-            Clone, configure, migrate, run.
-          </h2>
-          <p class="text-sm text-muted-foreground leading-relaxed">
+          <SectionHeader
+            kicker="Get Started"
+            title="Clone, configure, migrate, run."
+            mode="stack"
+          />
+          <p class="text-sm text-muted-foreground leading-relaxed -mt-4">
             Open <a href="http://localhost:3000" target="_blank" rel="noopener noreferrer" class="text-primary font-bold hover:underline">http://localhost:3000</a> — register the first account
             (becomes global manager), create a workspace, and start using
             the workbench.
@@ -91,9 +138,12 @@ const copyCode = async () => {
             v-for="(line, i) in commandLines"
             :key="i"
             class="block leading-6"
-          ><span class="text-primary/60 select-none">$ </span><span class="text-foreground">{{ line.command }}</span><span v-if="line.comment" class="text-muted-foreground/55 italic">  {{ line.comment }}</span></span></code></pre>
+          ><span class="text-muted-foreground/65 select-none">$ </span><span
+            v-for="(token, tokenIndex) in line.tokens"
+            :key="`${i}-${tokenIndex}`"
+            :class="tokenClasses[token.kind]"
+          >{{ token.text }}</span><span v-if="line.comment" class="text-[oklch(0.54_0.12_145)] dark:text-[oklch(0.76_0.1_145)] italic">  {{ line.comment }}</span></span></code></pre>
         </div>
       </div>
-    </div>
-  </section>
+  </SectionShell>
 </template>

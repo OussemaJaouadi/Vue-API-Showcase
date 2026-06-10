@@ -1,10 +1,19 @@
 <script setup lang="ts">
-import { PhArrowSquareOut, PhGithubLogo, PhShieldCheck, PhCode, PhRocket, PhLightning, PhDatabase } from '@phosphor-icons/vue'
+import { PhArrowSquareOut, PhGithubLogo, PhShieldCheck } from '@phosphor-icons/vue'
+import FallingPattern from './ui/FallingPattern.vue'
 </script>
 
 <template>
-  <section class="relative border-b border-border bg-background dot-grid overflow-hidden animate-section scroll-mt-24" style="animation-delay: 0s">
-    <div class="traffic-pattern"></div>
+  <section class="hero-section relative border-b border-border bg-background dot-grid overflow-hidden animate-section scroll-mt-24" style="animation-delay: 0s">
+    <FallingPattern
+      class="falling-pattern-hero"
+      color="oklch(0.508 0.118 165.612 / 0.38)"
+      background-color="transparent"
+      :duration="90"
+      blur-intensity="0.3rem"
+      :density="1.25"
+      :opacity="1"
+    />
     <div class="container max-w-5xl px-4 mx-auto py-20 md:py-28 relative z-10">
       <div class="text-center max-w-3xl mx-auto">
         <div class="inline-flex items-center gap-2 text-xs font-black uppercase tracking-[0.12em] text-primary mb-6 border border-primary/20 bg-primary/5 px-3 py-1.5">
@@ -22,7 +31,7 @@ import { PhArrowSquareOut, PhGithubLogo, PhShieldCheck, PhCode, PhRocket, PhLigh
           proxied HTTP and WebSocket requests from a browser UI.
         </p>
 
-        <div class="flex flex-col sm:flex-row gap-3 justify-center mb-10">
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
           <a
             href="https://github.com/OussemaJaouadi/Vue-API"
             target="_blank"
@@ -36,38 +45,11 @@ import { PhArrowSquareOut, PhGithubLogo, PhShieldCheck, PhCode, PhRocket, PhLigh
             href="#features"
             class="btn-tactile-muted px-6 py-3.5 text-sm font-bold inline-flex items-center justify-center gap-2.5"
           >
-            Explore Features ▸
+            Explore Features
             <PhArrowSquareOut :size="18" weight="bold" />
           </a>
         </div>
 
-        <div class="flex flex-wrap items-center justify-center gap-3">
-          <!-- Go -->
-          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 border border-primary/25 bg-primary/[0.04] text-xs font-extrabold text-foreground hover:border-primary/50 transition-colors cursor-default">
-            <PhCode :size="14" weight="bold" class="text-primary" />
-            Go 1.25+
-          </span>
-          <!-- Nuxt -->
-          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 border border-[oklch(0.6_0.15_160)]/20 bg-[oklch(0.5_0.12_165)]/[0.04] text-xs font-extrabold text-foreground hover:border-[oklch(0.6_0.15_160)]/50 transition-colors cursor-default">
-            <PhRocket :size="14" weight="bold" class="text-primary" />
-            Nuxt 4
-          </span>
-          <!-- Bun -->
-          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 border border-[oklch(0.65_0.18_70)]/20 bg-[oklch(0.65_0.18_70)]/[0.04] text-xs font-extrabold text-foreground hover:border-[oklch(0.65_0.18_70)]/50 transition-colors cursor-default">
-            <PhLightning :size="14" weight="bold" class="text-[oklch(0.65_0.18_70)]" />
-            Bun 1.3
-          </span>
-          <!-- SQLite -->
-          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 border border-primary/20 bg-primary/[0.04] text-xs font-extrabold text-foreground hover:border-primary/50 transition-colors cursor-default">
-            <PhDatabase :size="14" weight="bold" class="text-primary" />
-            SQLite
-          </span>
-          <!-- MIT -->
-          <span class="inline-flex items-center gap-1.5 px-3 py-1.5 border border-primary/25 bg-primary/[0.04] text-xs font-extrabold text-primary hover:border-primary/50 transition-colors cursor-default">
-            <PhShieldCheck :size="14" weight="bold" />
-            MIT License
-          </span>
-        </div>
       </div>
     </div>
   </section>

@@ -41,6 +41,7 @@
   --surface-2: oklch(0.96 0.002 286);
   --surface-3: oklch(0.25 0.008 286);
   --overlay-brand: oklch(0.508 0.118 165.612);
+  --falling-pattern-color: oklch(0.508 0.118 165.612 / 0.16);
 }
 
 .dark {
@@ -61,6 +62,7 @@
   --surface-2: oklch(0.285 0.008 286);
   --surface-3: oklch(0.82 0.012 286);
   --overlay-brand: oklch(0.64 0.145 165.612);
+  --falling-pattern-color: oklch(0.64 0.145 165.612 / 0.22);
 }
 
 body {
@@ -225,87 +227,94 @@ h1, h2, h3, h4, h5, h6 {
   );
 }
 
-/* Subtle falling traffic texture inspired by backend request flow. */
-.traffic-pattern {
-  --traffic-color: oklch(0.508 0.118 165.612 / 0.055);
-  --traffic-veil: oklch(1 0 0 / 0.82);
+/* Falling traffic texture inspired by backend request flow. */
+.falling-pattern {
   position: absolute;
   inset: 0;
-  pointer-events: none;
   overflow: hidden;
-  opacity: 0.5;
-  background-image:
-    radial-gradient(3px 78px at 0 42px, var(--traffic-color), transparent),
-    radial-gradient(3px 78px at 240px 118px, var(--traffic-color), transparent),
-    radial-gradient(1.5px 1.5px at 120px 76px, var(--traffic-color) 100%, transparent 150%),
-    radial-gradient(3px 96px at 80px 14px, var(--traffic-color), transparent),
-    radial-gradient(3px 96px at 320px 168px, var(--traffic-color), transparent),
-    radial-gradient(1.5px 1.5px at 280px 144px, var(--traffic-color) 100%, transparent 150%),
-    radial-gradient(3px 70px at 180px 96px, var(--traffic-color), transparent),
-    radial-gradient(3px 70px at 420px 46px, var(--traffic-color), transparent),
-    radial-gradient(1.5px 1.5px at 40px 180px, var(--traffic-color) 100%, transparent 150%);
-  background-size:
-    240px 180px,
-    240px 180px,
-    240px 180px,
-    320px 220px,
-    320px 220px,
-    320px 220px,
-    420px 260px,
-    420px 260px,
-    420px 260px;
-  background-position:
-    0 0,
-    12px 0,
-    120px 90px,
-    40px 20px,
-    60px 20px,
-    220px 120px,
-    80px 0,
-    100px 0,
-    300px 160px;
-  animation: traffic-fall 90s linear infinite;
-  mask-image: radial-gradient(ellipse at 58% 34%, black 0%, transparent 64%);
+  opacity: var(--falling-opacity);
+  mask-image: radial-gradient(ellipse at 55% 36%, black 0%, black 22%, transparent 72%);
 }
 
-.traffic-pattern::after {
-  content: "";
+.falling-pattern__plane {
   position: absolute;
   inset: 0;
-  backdrop-filter: blur(0.55rem);
-  background:
-    radial-gradient(ellipse at 55% 35%, transparent 0%, transparent 34%, var(--traffic-veil) 76%),
-    linear-gradient(to bottom, var(--traffic-veil), transparent 24%, transparent 68%, var(--traffic-veil));
+  background-position: var(--falling-start);
+  animation: falling-pattern-scroll var(--falling-duration) linear infinite;
 }
 
-.dark .traffic-pattern {
-  --traffic-color: oklch(0.64 0.145 165.612 / 0.11);
-  --traffic-veil: oklch(0.185 0.006 285.823 / 0.62);
-  opacity: 0.72;
+.falling-pattern__veil {
+  position: absolute;
+  inset: 0;
+  backdrop-filter: blur(var(--falling-blur));
+  background-image:
+    radial-gradient(circle at 50% 50%, transparent 0, transparent 2px, color-mix(in oklch, var(--falling-background) 72%, transparent) 2px),
+    radial-gradient(ellipse at 55% 35%, transparent 0%, transparent 42%, color-mix(in oklch, var(--falling-background) 76%, transparent) 82%);
+  background-size: var(--falling-density) var(--falling-density), 100% 100%;
 }
 
-.traffic-pattern-muted {
-  opacity: 0.28;
+.falling-pattern-hero {
+  mask-image: radial-gradient(ellipse at 50% 34%, black 0%, black 36%, transparent 78%);
+}
+
+.falling-pattern-hero .falling-pattern__veil {
+  display: none;
+}
+
+.falling-pattern-section {
+  mask-image: linear-gradient(to bottom, transparent 0%, black 10%, black 78%, transparent 100%);
+}
+
+.falling-pattern-section .falling-pattern__veil {
+  display: none;
+}
+
+.falling-pattern-muted {
   mask-image: linear-gradient(to bottom, transparent 0%, black 18%, black 78%, transparent 100%);
 }
 
-.dark .traffic-pattern-muted {
-  opacity: 0.38;
+.dark .falling-pattern__veil {
+  filter: brightness(1.18);
 }
 
-@keyframes traffic-fall {
+@keyframes falling-pattern-scroll {
   to {
-    background-position:
-      0 5200px,
-      12px 5200px,
-      120px 5290px,
-      40px 7600px,
-      60px 7600px,
-      220px 7720px,
-      80px 6100px,
-      100px 6100px,
-      300px 6260px;
+    background-position: var(--falling-end);
   }
+}
+
+.section-shell-continuity::before,
+.section-shell-continuity::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  z-index: 1;
+  height: 5rem;
+  pointer-events: none;
+}
+
+.section-shell-continuity::before {
+  top: 0;
+  background: linear-gradient(to bottom, var(--section-fade-color), transparent);
+}
+
+.section-shell-continuity::after {
+  bottom: 0;
+  background: linear-gradient(to top, var(--section-fade-color), transparent);
+  opacity: 0.72;
+}
+
+.hero-section::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  height: 7rem;
+  pointer-events: none;
+  background: linear-gradient(to top, var(--background), transparent);
 }
 
 /* Reduced motion support */
@@ -315,22 +324,6 @@ html.reduce-motion * {
   animation-iteration-count: 1 !important;
   transition-duration: 0.001ms !important;
   scroll-behavior: auto !important;
-}
-
-/* Floating animation */
-@keyframes float {
-  0%, 100% {
-    transform: translate3d(0, 0, 0) scale(1);
-  }
-  50% {
-    transform: translate3d(5px, -15px, 0) scale(1.02);
-  }
-}
-.animate-float-slow {
-  animation: float 14s ease-in-out infinite;
-}
-.animate-float-slower {
-  animation: float 18s ease-in-out infinite;
 }
 
 /* Section entrance animations */

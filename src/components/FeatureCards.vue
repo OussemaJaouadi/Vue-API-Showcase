@@ -12,6 +12,9 @@ import {
   PhBracketsCurly,
   PhWebhooksLogo
 } from '@phosphor-icons/vue'
+import SectionHeader from './SectionHeader.vue'
+import SectionShell from './SectionShell.vue'
+import FallingPattern from './ui/FallingPattern.vue'
 
 interface FeatureItem {
   title: string
@@ -23,6 +26,7 @@ interface FeatureGroup {
   title: string
   summary: string
   icon: any
+  accent: string
   items: FeatureItem[]
 }
 
@@ -31,6 +35,7 @@ const groups: FeatureGroup[] = [
     title: 'Build requests',
     summary: 'Stop switching between editors, auth configs, and environment files. Compose everything in one surface before the request crosses the network boundary.',
     icon: PhPuzzlePiece,
+    accent: 'oklch(0.55 0.16 250)',
     items: [
       {
         title: 'Request Editor',
@@ -53,6 +58,7 @@ const groups: FeatureGroup[] = [
     title: 'Execute safely',
     summary: 'Direct browser-to-API calls leak credentials and bypass audit. Route every request through the Go proxy so execution is recorded, timed, and controlled.',
     icon: PhShieldCheck,
+    accent: 'oklch(0.508 0.118 165.612)',
     items: [
       {
         title: 'HTTP Execution Proxy',
@@ -75,6 +81,7 @@ const groups: FeatureGroup[] = [
     title: 'Organize teams',
     summary: 'Without workspace boundaries, shared API collections become credential spreadsheets. Isolate teams, imports, and auth into scoped workspaces.',
     icon: PhUsersFour,
+    accent: 'oklch(0.58 0.16 305)',
     items: [
       {
         title: 'Workspaces',
@@ -97,28 +104,42 @@ const groups: FeatureGroup[] = [
 </script>
 
 <template>
-  <section id="features" class="py-12 md:py-16 border-b border-border bg-muted animate-section scroll-mt-24">
-    <div class="container max-w-6xl px-4 mx-auto">
-      <div class="flex flex-col md:flex-row md:items-end md:justify-between gap-4 mb-8">
-        <div>
-          <div class="section-kicker mb-3">Features</div>
-          <h2 class="text-3xl md:text-4xl font-bold tracking-tight text-foreground">
-            Three workflows, one backend boundary.
-          </h2>
-        </div>
-        <p class="text-sm text-muted-foreground max-w-xl leading-relaxed">
-          The feature set reads better as how the workbench is used: build requests, execute them safely, and organize the team context around them.
-        </p>
-      </div>
+  <SectionShell id="features" tone="muted">
+    <template #background>
+      <FallingPattern
+        class="falling-pattern-section"
+        color="oklch(0.508 0.118 165.612 / 0.14)"
+        background-color="transparent"
+        :duration="170"
+        blur-intensity="0"
+        :density="1.55"
+        :opacity="0.28"
+      />
+    </template>
+    <SectionHeader
+      kicker="Features"
+      title="Three workflows, one backend boundary."
+      body="The feature set reads better as how the workbench is used: build requests, execute them safely, and organize the team context around them."
+    />
 
       <div class="grid lg:grid-cols-3 gap-5">
         <article
           v-for="group in groups"
           :key="group.title"
           class="surface-tactile p-5 flex flex-col hover:-translate-y-1 hover:border-primary/40 group"
+          :style="{
+            boxShadow: `4px 4px 0 0 color-mix(in oklch, ${group.accent} 15%, transparent)`
+          }"
         >
           <div class="flex items-start gap-3 mb-5">
-            <div class="p-2.5 border border-primary/25 bg-primary/5 text-primary">
+            <div
+              class="p-2.5 border"
+              :style="{
+                color: group.accent,
+                borderColor: `color-mix(in oklch, ${group.accent} 28%, transparent)`,
+                backgroundColor: `color-mix(in oklch, ${group.accent} 7%, transparent)`
+              }"
+            >
               <component :is="group.icon" :size="24" weight="bold" />
             </div>
             <div>
@@ -134,7 +155,13 @@ const groups: FeatureGroup[] = [
               class="surface-flat p-3 transition-colors group-hover:border-primary/20"
             >
               <div class="flex items-center gap-2 mb-2">
-                <component :is="item.icon" :size="17" weight="bold" class="text-primary shrink-0" />
+                <component
+                  :is="item.icon"
+                  :size="17"
+                  weight="bold"
+                  class="shrink-0"
+                  :style="{ color: group.accent }"
+                />
                 <h4 class="font-heading font-bold text-sm text-foreground">{{ item.title }}</h4>
               </div>
               <p class="text-xs leading-relaxed text-muted-foreground">{{ item.description }}</p>
@@ -142,6 +169,5 @@ const groups: FeatureGroup[] = [
           </div>
         </article>
       </div>
-    </div>
-  </section>
+  </SectionShell>
 </template>

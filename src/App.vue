@@ -8,6 +8,12 @@ import Screenshots from './components/Screenshots.vue'
 import TechStack from './components/TechStack.vue'
 import QuickStart from './components/QuickStart.vue'
 import Footer from './components/Footer.vue'
+
+const navLinks = [
+  { label: 'Architecture', href: '#architecture' },
+  { label: 'Features', href: '#features' },
+  { label: 'Setup', href: '#quick-start' }
+]
 </script>
 
 <template>
@@ -26,40 +32,18 @@ import Footer from './components/Footer.vue'
         <!-- Header actions -->
         <nav class="flex items-center gap-3 sm:gap-4">
           <a
-            href="#architecture"
-            class="hidden md:inline-flex text-sm font-semibold text-muted-foreground hover:text-primary transition-colors"
-          >
-            Architecture
-          </a>
-          <a
-            href="#credibility"
-            class="hidden lg:inline-flex text-sm font-semibold text-muted-foreground hover:text-primary transition-colors"
-          >
-            Proof
-          </a>
-          <a
-            href="#features"
-            class="hidden lg:inline-flex text-sm font-semibold text-muted-foreground hover:text-primary transition-colors"
-          >
-            Features
-          </a>
-          <a
-            href="#screenshots"
-            class="hidden md:inline-flex text-sm font-semibold text-muted-foreground hover:text-primary transition-colors"
-          >
-            Screenshots
-          </a>
-          <a
-            href="#quick-start"
+            v-for="link in navLinks"
+            :key="link.href"
+            :href="link.href"
             class="text-sm font-semibold text-muted-foreground hover:text-primary transition-colors"
           >
-            Setup
+            {{ link.label }}
           </a>
           <a
             href="https://github.com/OussemaJaouadi/Vue-API"
             target="_blank"
             rel="noopener noreferrer"
-            class="hidden sm:inline-flex text-sm font-semibold text-muted-foreground hover:text-primary transition-colors"
+            class="hidden sm:inline-flex btn-tactile-muted px-3 py-1.5 text-xs font-bold"
           >
             GitHub
           </a>
@@ -80,13 +64,13 @@ import Footer from './components/Footer.vue'
       <!-- 2. Architecture Section -->
       <Architecture />
 
-      <!-- 3. Features Cards Grid -->
+      <!-- 3. Feature Workflows -->
       <FeatureCards />
 
-      <!-- 4. Interactive CSS Screenshots Section -->
+      <!-- 4. Screenshot Slots -->
       <Screenshots />
 
-      <!-- 5. Tech Stack Table -->
+      <!-- 5. Tech Stack -->
       <TechStack />
 
       <!-- 6. Quick Start Guide -->
